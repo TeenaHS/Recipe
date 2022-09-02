@@ -124,10 +124,3 @@ POST
 		   "instruction": "string", \ 
 		}'	
 ```
-## This exposes the following endpoints:
-
-(http://localhost:8085/recipes) The recipe API
-(http://localhost:8080/v1/ingredients) The ingredient API
-(http://localhost:8080/swagger-ui.html) The documentation for the APIs as a swagger-ui html page.
-(http://localhost:8080/v3/api-docs) The documentation for the APIs in OpenAPI json format.
-(http://localhost:8080/actuator/health) Endpoint for the status of the service.

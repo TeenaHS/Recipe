@@ -1,0 +1,13 @@
+Json to add recipe(POST method):
+{
+        "dish": "Jelly Pudding",
+        "foodType": "VEG",
+        "numberOfServings": 4,
+        "ingredients": "Jelly mix",
+        "instructions": "Add the jelly mix in hot water and stir for 10 minutes"
+}
+
+Json to update recipe(PUT method):
+{
+    "foodType": "NON-VEG"
+}

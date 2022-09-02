@@ -1,61 +1,20 @@
 package com.assessment.Recipe.dto;
 
 import com.assessment.Recipe.entity.Recipes;
-
+import lombok.Getter;
+import lombok.Setter;
+@Getter
+@Setter
 public class RecipeDTO {
-    Integer rid;
-    String dish;
-    String foodType;
-    Integer numberOfServings;
-    String ingredients;
-    String instruction;
+    private Integer rid;
+    private String dish;
+    private String foodType;
+    private Integer numberOfServings;
+    private String ingredients;
+    private String instruction;
 
-    public Integer getRid() {
-        return rid;
-    }
-
-    public void setRid(Integer rid) {
-        this.rid = rid;
-    }
-
-    public String getDish() {
-        return dish;
-    }
-
-    public void setDish(String dish) {
-        this.dish = dish;
-    }
-
-    public String getFoodType() {
-        return foodType;
-    }
-
-    public void setFoodType(String foodType) {
-        this.foodType = foodType;
-    }
-
-    public Integer getNumberOfServings() {
-        return numberOfServings;
-    }
-
-    public void setNumberOfServings(Integer numberOfServings) {
-        this.numberOfServings = numberOfServings;
-    }
-
-    public String getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public String getInstruction() {
-        return instruction;
-    }
-
-    public void setInstruction(String instruction) {
-        this.instruction = instruction;
+    public RecipeDTO() {
+        super();
     }
 
     public Recipes createEntity() {
@@ -81,4 +40,5 @@ public class RecipeDTO {
         recipedto1.setIngredients(res.getIngredients());
         return recipedto1;
     }
+
 }

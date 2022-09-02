@@ -1,14 +1,17 @@
 package com.assessment.Recipe.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import javax.persistence.*;
-
+@Getter
+@Setter
 @Entity
 @Table(name = "recipes")
 public class Recipes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RID")
-    private Integer rid ;
+    private Integer rid;
     @Column(name = "Dish")
     private String dish;
     @Column(name = "Foodtype")
@@ -21,58 +24,9 @@ public class Recipes {
     private String instruction;
 
     public Recipes() {
-
+        super();
+    }
+    public Recipes(int rid, String dish, String foodType, int numberOfServings, String ingredients, String instruction) {
     }
 
-    public Recipes(int rid, String dish, String foodType, Integer numberOfServings, String ingredients, String instruction) {
-    }
-
-
-    public Integer getRid() {
-        return rid;
-    }
-
-    public void setRid(Integer rid) {
-        this.rid = rid;
-    }
-
-    public String getDish() {
-        return dish;
-    }
-
-    public void setDish(String dish) {
-        this.dish = dish;
-    }
-
-    public String getFoodType() {
-        return foodType;
-    }
-
-    public void setFoodType(String foodType) {
-        this.foodType = foodType;
-    }
-
-    public Integer getNumberOfServings() {
-        return numberOfServings;
-    }
-
-    public void setNumberOfServings(Integer numberOfServings) {
-        this.numberOfServings = numberOfServings;
-    }
-
-    public String getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public String getInstruction() {
-        return instruction;
-    }
-
-    public void setInstruction(String instruction) {
-        this.instruction = instruction;
-    }
 }

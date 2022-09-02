@@ -3,14 +3,13 @@ package com.assessment.Recipe.controller;
 import com.assessment.Recipe.dto.RecipeDTO;
 import com.assessment.Recipe.dto.UserDTO;
 import com.assessment.Recipe.entity.Recipes;
-import com.assessment.Recipe.service.Recipeservice;
-
+import com.assessment.Recipe.exception.RecipeException;
+import com.assessment.Recipe.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,45 +18,43 @@ import java.util.List;
 @Slf4j
 @RestController
 @CrossOrigin
-public class Recipecontroller {
+public class RecipeController {
     @Autowired
-    Recipeservice recipeservice;
-    @Autowired
-    private Environment environment;
+    RecipeService recipeservice;
 
 
-    //Get a list of recipes
+    //Get list of recipes
     @Operation(summary ="Get Recipes",description ="Get a list of recipes", tags = "Get")
     @ApiResponses(value={@ApiResponse(responseCode = "200",description = "Recipe list" ),
-    @ApiResponse(responseCode = "404", description = "Recipe list not found")})
+            @ApiResponse(responseCode = "404", description = "Recipe list not found")})
     @GetMapping(value= "/recipes")
-    public ResponseEntity<List<RecipeDTO>> getAllRecipes() throws Exception {
+    public ResponseEntity<List<RecipeDTO>> getAllRecipes() throws RecipeException {
         List<RecipeDTO> recipeList = recipeservice.getAllRecipes();
         log.info("List of recipes");
         return new ResponseEntity<>(recipeList, HttpStatus.OK);
 
     }
 
-    //get particular recipe by ID
+    //Get particular recipe by ID
     @Operation(summary ="Get Recipe",description ="Get a particular recipe by ID", tags = "Get")
     @ApiResponses(value={@ApiResponse(responseCode = "200",description = "Recipe" ),
             @ApiResponse(responseCode = "404", description = "Recipe not found")})
     @GetMapping(value= "/recipes/{rid}")
-    public ResponseEntity<RecipeDTO>getRecipe(@PathVariable Integer rid) throws Exception {
+    public ResponseEntity<RecipeDTO>getRecipe(@PathVariable Integer rid) throws RecipeException {
         RecipeDTO recipe = recipeservice.getRecipe(rid);
         log.info("Getting a particular recipe by ID:"+ rid);
         return new ResponseEntity<>(recipe, HttpStatus.OK);
 
     }
 
-    //Add a recipe
+    //Create a recipe
     @Operation(summary ="Add Recipe",description ="Add a recipe", tags = "Post")
     @ApiResponses(value={@ApiResponse(responseCode = "200",description = "Add a recipe" ),
             @ApiResponse(responseCode = "404", description = "Recipe added")})
     @PostMapping(value= "/recipes")
     public ResponseEntity<String> addRecipe (@RequestBody RecipeDTO recipe) throws Exception {
-        Integer rid = recipeservice.addRecipe(recipe);
-        String successMessage = "Recipe inserted successfully : " + rid;
+        Recipes r = recipeservice.addRecipe(recipe);
+        String successMessage = "Recipe inserted successfully ";
         log.info("Adding the recipe...");
         log.info("Recipe is added to the list");
         return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
@@ -68,7 +65,7 @@ public class Recipecontroller {
     @Operation(summary ="Update Recipe",description ="Update a particular recipe by ID", tags = "Update")
     @PutMapping(value= "/recipes/{rid}" )
     public ResponseEntity<Recipes> updateRecipe(@PathVariable Integer rid, @RequestBody RecipeDTO recipe) throws Exception {
-       Recipes updateExistingRecipe = recipeservice.updateRecipe(rid,recipe.getNumberOfServings());
+        Recipes updateExistingRecipe = recipeservice.updateRecipe(rid,recipe.getNumberOfServings());
         log.info("Updating the recipe...");
         log.info("Updated a particular recipe by ID:"+ rid);
         return new ResponseEntity<>(updateExistingRecipe, HttpStatus.OK);
@@ -79,7 +76,7 @@ public class Recipecontroller {
     @DeleteMapping(value= "/recipes/{rid}" )
     public ResponseEntity<String> deleteRecipe (@PathVariable Integer rid) throws Exception {
         recipeservice.deleteRecipe(rid);
-        String successMessage = environment.getProperty("API.DELETE_SUCCESS");
+        String successMessage ="Recipe deleted successfully";
         System.out.print(successMessage);
         log.info("Deleting the recipe...");
         log.info("Deleted a particular recipe by ID:"+ rid);
@@ -95,5 +92,6 @@ public class Recipecontroller {
         log.info("Recipe is filtered");
         return new ResponseEntity<>(searchRecipe, HttpStatus.OK);
     }
+
 
 }

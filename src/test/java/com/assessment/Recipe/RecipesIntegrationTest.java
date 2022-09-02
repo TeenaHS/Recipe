@@ -11,19 +11,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-public class RecipesTest extends RecipeApplicationTests {
-
+public class RecipesIntegrationTest extends RecipeApplicationTests {
     @Autowired
     private WebApplicationContext webApplicationContext;
-
     private MockMvc mvc;
-
     @Before
     public void setup() {
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
-
     @Test
     public void recipeList() throws Exception {
         mvc.perform(MockMvcRequestBuilders
@@ -82,11 +77,12 @@ public class RecipesTest extends RecipeApplicationTests {
     @Test
     public void deleteRecipe() throws Exception {
         mvc.perform(MockMvcRequestBuilders
-                        .delete("/recipes/{rid}", 4)
+                        .delete("/recipes/{rid}", 1)
                 )
                 .andExpect(status().isOk());
     }
 }
+
 
 
 

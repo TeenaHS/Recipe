@@ -36,32 +36,17 @@ Application is then ready to run.
 TableScripts for the database can be found in resources folder with the name Recipedb.txt
 
 Swagger is integrated for easy access of API. It can be accessed via : `http://localhost:8085/swagger-ui/index.html`
+The "Try it out" function on the swagger-ui page can be used to invoke the endpoints.
 
 Url for open api doc: `http://localhost:8085/v3/api-docs`
 
-Json objects required to test the endpoints are given below.
 
-```
-Json to add recipe(POST method):
-{
-        "dish": "Jelly Pudding",
-        "foodType": "VEG",
-        "numberOfServings": 4,
-        "ingredients": "Jelly mix",
-        "instructions": "Add the jelly mix in hot water and stir for 10 minutes"
-}
-```
-```
-Json to update recipe(PUT method):
-{
-    "foodType": "NON-VEG"
-}
-```
 
 ## API Details
 - Create Recipe
 
-Create recipe service is used to create new recipe. It is POST request which accepts JSON body for recipe.
+Create recipe service is used to create new recipe. Following is the api url. It is POST request which accepts JSON body for recipe.
+(http://localhost:8085/recipes)
 ```
 POST 
 		'Content-Type: application/json'
@@ -79,7 +64,8 @@ POST
 
 - Update Recipe
 
-Update recipe service is used to update existing recipe. It is PUT request which accepts JSON body for recipe along-with ID as path parameter.
+Update recipe service is used to update existing recipe.  Following is the api url. It is PUT request which accepts JSON body for recipe along-with ID as path parameter.
+(http://localhost:8085/recipes/{rid})
 ```
 PUT 
 		'Content-Type: application/json' 
@@ -93,7 +79,8 @@ PUT
 
 - Get All Recipes
 
-Get all recipe service is used to get list of all the recipes. It is GET request.
+Get all recipe service is used to get list of all the recipes.  Following is the api url. It is GET request.
+(http://localhost:8085/recipes)
 ```
 GET 
 		'Accept: application/json' 
@@ -102,7 +89,8 @@ GET
 
 - Find Recipe by ID
 
-Find recipe by ID can be used to fetch particular Recipe. It is GET request which accept ID as path parameter.
+Find recipe by ID can be used to fetch particular Recipe.  Following is the api url. It is GET request which accept ID as path parameter.
+(http://localhost:8085/recipes/{rid})
 ```
 GET 
 		'Accept: application/json' 
@@ -111,10 +99,34 @@ GET
 
 - Delete Recipe By ID
 
-Delete recipe by ID can be used to delete particular Recipe. It is DELETE request which accept ID as path parameter.
+Delete recipe by ID can be used to delete particular Recipe. Following is the api url. It is DELETE request which accept ID as path parameter.
+(http://localhost:8085/recipes/{rid})
 ```
 GET 
 		'Accept: application/json' 
 		'/recipes/{rid}'
 ```
+- Search Recipe 
 
+Search recipe can be used to filter the recipes with certain criteria . Following is the api url. It is POST request which accepts JSON body for recipe.
+(http://localhost:8085/recipes/filter)
+```
+POST 
+		'Content-Type: application/json'
+		'/recipes'
+		
+		'Accept: application/json' -d 
+		'{ \ 
+		   "foodType": "string",\
+		   "numberOfServings": 0, \ 
+		   "ingredients": "string",\
+		   "instruction": "string", \ 
+		}'	
+```
+## This exposes the following endpoints:
+
+(http://localhost:8085/recipes) The recipe API
+(http://localhost:8080/v1/ingredients) The ingredient API
+(http://localhost:8080/swagger-ui.html) The documentation for the APIs as a swagger-ui html page.
+(http://localhost:8080/v3/api-docs) The documentation for the APIs in OpenAPI json format.
+(http://localhost:8080/actuator/health) Endpoint for the status of the service.

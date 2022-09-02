@@ -62,20 +62,59 @@ Json to update recipe(PUT method):
 - Create Recipe
 
 Create recipe service is used to create new recipe. It is POST request which accepts JSON body for recipe.
+```
+POST 
+		'Content-Type: application/json'
+		'/recipes'
+		
+		'Accept: application/json' -d 
+		'{ \ 
+		   "dish": "string", \ 
+		   "foodType": "string",\
+		   "numberOfServings": 0, \ 
+		   "ingredients": "string",\
+		   "instruction": "string", \ 
+		}'	
+```
 
 - Update Recipe
 
 Update recipe service is used to update existing recipe. It is PUT request which accepts JSON body for recipe along-with ID as path parameter.
+```
+PUT 
+		'Content-Type: application/json' 
+		'/recipes/{rid}'
+		
+		'Accept: application/json' -d 
+		'{ \  
+		   "numberOfServings": 0, \ 
+		}'	 
+```
 
 - Get All Recipes
 
 Get all recipe service is used to get list of all the recipes. It is GET request.
+```
+GET 
+		'Accept: application/json' 
+		'/recipes'
+```
 
 - Find Recipe by ID
 
 Find recipe by ID can be used to fetch particular Recipe. It is GET request which accept ID as path parameter.
+```
+GET 
+		'Accept: application/json' 
+		'/recipes/{rid}'
+```
 
 - Delete Recipe By ID
 
 Delete recipe by ID can be used to delete particular Recipe. It is DELETE request which accept ID as path parameter.
+```
+GET 
+		'Accept: application/json' 
+		'/recipes/{rid}'
+```
 

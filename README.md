@@ -30,6 +30,7 @@ mvn clean install
 ```
 
 In case, If you want to run the application directly from IDE. Import the project to your favorite IDE as 'Existing maven project'. Select project from the IDE and run it as java application. Don't forget to update maven. I have configured the port to 8085 in properties. So the application can be accessed by `http://localhost:8085`
+Enter username and password in application.properties
 
 Application is then ready to run.
 

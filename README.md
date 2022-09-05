@@ -124,4 +124,3 @@ POST
 		   "instruction": "string", \ 
 		}'	
 ```
-Use POSTMAN to check the endpoints.

@@ -23,7 +23,9 @@ public class RecipeController {
     RecipeService recipeservice;
 
 
-    //Get list of recipes
+    /**
+     * @return Will return list of all Recipes in database
+     */
     @Operation(summary ="Get Recipes",description ="Get a list of recipes", tags = "Get")
     @ApiResponses(value={@ApiResponse(responseCode = "200",description = "Recipe list" ),
             @ApiResponse(responseCode = "404", description = "Recipe list not found")})
@@ -35,7 +37,11 @@ public class RecipeController {
 
     }
 
-    //Get particular recipe by ID
+    /**
+     * @param rid Recipes id which need to be found
+     * @return one record matching the Recipes ID
+     * @throws RecipeException exception if id is not found
+     */
     @Operation(summary ="Get Recipe",description ="Get a particular recipe by ID", tags = "Get")
     @ApiResponses(value={@ApiResponse(responseCode = "200",description = "Recipe" ),
             @ApiResponse(responseCode = "404", description = "Recipe not found")})
@@ -47,12 +53,15 @@ public class RecipeController {
 
     }
 
-    //Create a recipe
+    /**
+     * @param recipe information need to save in DB
+     * @return Saved object into database
+     */
     @Operation(summary ="Add Recipe",description ="Add a recipe", tags = "Post")
     @ApiResponses(value={@ApiResponse(responseCode = "200",description = "Add a recipe" ),
             @ApiResponse(responseCode = "404", description = "Recipe added")})
     @PostMapping(value= "/recipes")
-    public ResponseEntity<String> addRecipe (@RequestBody RecipeDTO recipe) throws Exception {
+    public ResponseEntity<String> addRecipe (@RequestBody RecipeDTO recipe) throws RecipeException {
         Recipes r = recipeservice.addRecipe(recipe);
         String successMessage = "Recipe inserted successfully ";
         log.info("Adding the recipe...");
@@ -61,20 +70,27 @@ public class RecipeController {
 
     }
 
-    //Update a particular recipe by ID
+    /**
+     * @param rid      Recipes id which need to be updated
+     * @param recipe EntityNotFoundException exception if id is not found
+     */
     @Operation(summary ="Update Recipe",description ="Update a particular recipe by ID", tags = "Update")
     @PutMapping(value= "/recipes/{rid}" )
-    public ResponseEntity<Recipes> updateRecipe(@PathVariable Integer rid, @RequestBody RecipeDTO recipe) throws Exception {
+    public ResponseEntity<Recipes> updateRecipe(@PathVariable Integer rid, @RequestBody RecipeDTO recipe) throws RecipeException {
         Recipes updateExistingRecipe = recipeservice.updateRecipe(rid,recipe.getNumberOfServings());
         log.info("Updating the recipe...");
         log.info("Updated a particular recipe by ID:"+ rid);
         return new ResponseEntity<>(updateExistingRecipe, HttpStatus.OK);
 
     }
-    //Delete a particular recipe by ID
+
+    /**
+     * @param rid Recipes id which need to be deleted
+     * @throws RecipeException exception if id is not found
+     */
     @Operation(summary ="Delete Recipe",description ="Delete a particular recipe by ID", tags = "Delete")
     @DeleteMapping(value= "/recipes/{rid}" )
-    public ResponseEntity<String> deleteRecipe (@PathVariable Integer rid) throws Exception {
+    public ResponseEntity<String> deleteRecipe (@PathVariable Integer rid) throws RecipeException {
         recipeservice.deleteRecipe(rid);
         String successMessage ="Recipe deleted successfully";
         System.out.print(successMessage);
@@ -83,7 +99,10 @@ public class RecipeController {
         return new ResponseEntity<>(successMessage, HttpStatus.OK);
     }
 
-    //Filter recipes
+    /**
+     * @param recipe information saved in db
+     * @return will return list of recipes contains information
+     */
     @Operation(summary ="Filter Recipe",description ="Filter recipes ", tags = "Post")
     @PostMapping(value = "/recipes/filter")
     public ResponseEntity<List<Recipes>> getSearch (@RequestBody UserDTO recipe) throws Exception {
@@ -92,6 +111,4 @@ public class RecipeController {
         log.info("Recipe is filtered");
         return new ResponseEntity<>(searchRecipe, HttpStatus.OK);
     }
-
-
 }

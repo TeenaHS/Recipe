@@ -8,14 +8,12 @@ import com.assessment.Recipe.repository.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Slf4j
 @Service
-@Transactional
 public class RecipeServiceImpl implements RecipeService {
     @Autowired
     private RecipeRepository reciperepository;
@@ -29,7 +27,6 @@ public class RecipeServiceImpl implements RecipeService {
             RecipeDTOs.add(recipedto1);
         }
         log.info("Recipe Details : {}", RecipeDTOs);
-        //  System.out.println("Getting data from DB :" + recipes);
         return RecipeDTOs;
     }
 

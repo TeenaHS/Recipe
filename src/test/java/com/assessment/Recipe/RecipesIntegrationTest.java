@@ -19,6 +19,10 @@ public class RecipesIntegrationTest extends RecipeApplicationTests {
     public void setup() {
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
+
+    /**
+     * Integration testcases
+     */
     @Test
     public void recipeList() throws Exception {
         mvc.perform(MockMvcRequestBuilders

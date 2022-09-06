@@ -18,7 +18,9 @@ public class RecipeServiceImpl implements RecipeService {
     @Autowired
     private RecipeRepository reciperepository;
 
-    //Get a list of recipes
+    /**
+     *  Get a list of recipes
+     */
     public List<RecipeDTO> getAllRecipes() throws RecipeException {
         List<Recipes> recipes = reciperepository.findAll();
         List<RecipeDTO> RecipeDTOs = new ArrayList<RecipeDTO>();
@@ -30,7 +32,9 @@ public class RecipeServiceImpl implements RecipeService {
         return RecipeDTOs;
     }
 
-    //Get particular recipe by ID
+    /**
+     * Get particular recipe by ID
+     */
     public RecipeDTO getRecipe(Integer RID) throws RecipeException {
         Optional<Recipes> optional = reciperepository.findById(RID);
         Recipes recipe = optional.orElseThrow(() -> new RecipeException("Service.RECIPE_NOT_FOUND"));
@@ -39,7 +43,9 @@ public class RecipeServiceImpl implements RecipeService {
         return recipe2;
     }
 
-    //Create a recipe
+    /**
+     * Create a recipe
+     */
     public Recipes addRecipe(RecipeDTO recipe) throws RecipeException {
         Recipes recipe1 = new Recipes();
         recipe1.setRid(recipe.getRid());
@@ -52,7 +58,9 @@ public class RecipeServiceImpl implements RecipeService {
         return newRecipe;
     }
 
-    //Update a particular recipe by ID
+    /**
+     * Update a particular recipe by ID
+     */
     public Recipes updateRecipe(Integer RID, Integer numberofservings) throws RecipeException {
         Optional<Recipes> searchRecipe = reciperepository.findById(RID);
         Recipes updateRecipe = searchRecipe.orElseThrow(() -> new RecipeException("Service.RECIPE_NOT_FOUND"));
@@ -60,14 +68,18 @@ public class RecipeServiceImpl implements RecipeService {
         return updateRecipe;
     }
 
-    //Delete a particular recipe by ID
+    /**
+     * Delete a particular recipe by ID
+     */
     public void deleteRecipe(Integer RID) throws RecipeException {
         Optional<Recipes> recipe = reciperepository.findById(RID);
         recipe.orElseThrow(() -> new RecipeException("Service.RECIPE_NOT_FOUND"));
         reciperepository.deleteById(RID);
     }
 
-    //Filter recipes
+    /**
+     *Filter recipes
+     */
     public List<Recipes> getSearch(UserDTO recipe) throws RecipeException {
         List<Recipes> returnList = new ArrayList<>();
         List<Recipes> list = reciperepository.findAll();

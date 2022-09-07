@@ -28,16 +28,18 @@ public class RecipeUnitTest extends RecipeApplicationTests{
     /**
      * Unit testcases for service class
      * Test case to Get all recipes
+     * @throws RecipeException
      */
     @Test
     public void getAllRecipesTest() throws RecipeException {
-        when(reciperepository.findAll()).thenReturn(Stream.of(new Recipes(1, "Aloo Matar", "Veg", 3, "Potato,Onion,Tomato,Peas,Garlic,Oil,Salt,Water,Spices", "Cook Aloo matar"),
-                new Recipes(2, "Chicken Tikka Kabab", "Non-Veg", 4, "Chicken,Onion,Spices,Salt,Yogurt,Bell pepper,Garlic", " Cook Chicken ")).collect(Collectors.toList()));
+        when(reciperepository.findAll()).thenReturn(Stream.of(new Recipes(1, "Aloo Matar", "Veg", 3, "Potato,Onion,Matar", "Cook Aloo matar"),
+                new Recipes(2, "Chicken Tikka Kabab", "Non-Veg", 4, "Chicken,Onion,Spices", " Cook Chicken ")).collect(Collectors.toList()));
         assertEquals(2, recipeservice.getAllRecipes().size());
     }
 
     /**
      * Test case to Get a particular recipe
+     * @throws RecipeException
      */
     @Test
     public void getRecipeTest() throws RecipeException {
@@ -48,6 +50,7 @@ public class RecipeUnitTest extends RecipeApplicationTests{
 
     /**
      * Test case to Update a particular recipe
+     * @throws RecipeException
      */
     @Test
     public void updateRecipeTest() throws RecipeException {
@@ -60,15 +63,18 @@ public class RecipeUnitTest extends RecipeApplicationTests{
 
     /**
      * Test case to Delete a particular recipe
+     * @throws RecipeException
      */
     @Test
     public void deleteRecipeTest() throws RecipeException {
         reciperepository.findById(anyInt());
         verify(reciperepository).findById(anyInt());
     }
-/************************************************************************/
+    /************************************************************************/
+
     /**
      * Test cases for invalid scenarios
+     * @throws RecipeException
      */
     @Test
     public void getAllRecipesInvalidTest() throws RecipeException{
@@ -85,6 +91,9 @@ public class RecipeUnitTest extends RecipeApplicationTests{
         }
     }
 
+    /**
+     * @throws RecipeException
+     */
     @Test
     public void getRecipeInvalidTest() throws RecipeException{
         Optional<Recipes> recipes=Optional.of(new Recipes());
@@ -100,6 +109,9 @@ public class RecipeUnitTest extends RecipeApplicationTests{
         }
     }
 
+    /**
+     * @throws RecipeException
+     */
     @Test
     public void updateRecipeInvalidTest() throws RecipeException{
         Optional<Recipes> recipes=Optional.of(new Recipes());
@@ -115,6 +127,9 @@ public class RecipeUnitTest extends RecipeApplicationTests{
         }
     }
 
+    /**
+     * @throws RecipeException
+     */
     @Test
     public void deleteRecipeInvalidTest() throws RecipeException{
         Optional<Recipes> recipes=Optional.of(new Recipes());
@@ -131,5 +146,3 @@ public class RecipeUnitTest extends RecipeApplicationTests{
     }
 
 }
-
-

@@ -22,6 +22,8 @@ public class RecipesIntegrationTest extends RecipeApplicationTests {
 
     /**
      * Integration testcases
+     * Test case to Get all recipes
+     * @throws Exception
      */
     @Test
     public void recipeList() throws Exception {
@@ -34,6 +36,10 @@ public class RecipesIntegrationTest extends RecipeApplicationTests {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
     }
 
+    /**
+     * Test case to Get a particular recipe
+     * @throws Exception
+     */
     @Test
     public void recipe() throws Exception {
         mvc.perform(MockMvcRequestBuilders
@@ -46,6 +52,10 @@ public class RecipesIntegrationTest extends RecipeApplicationTests {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
     }
 
+    /**
+     * Test case to Add a recipe
+     * @throws Exception
+     */
     @Test
     public void recipeAdd() throws Exception {
         mvc.perform(MockMvcRequestBuilders
@@ -66,6 +76,10 @@ public class RecipesIntegrationTest extends RecipeApplicationTests {
         }
     }
 
+    /**
+     * Test case to Update a particular recipe
+     * @throws Exception
+     */
     @Test
     public void updateRecipe() throws Exception {
         mvc.perform(MockMvcRequestBuilders
@@ -78,15 +92,15 @@ public class RecipesIntegrationTest extends RecipeApplicationTests {
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
     }
 
+    /**
+     * Test case to Delete a particular recipe
+     * @throws Exception
+     */
     @Test
     public void deleteRecipe() throws Exception {
         mvc.perform(MockMvcRequestBuilders
-                        .delete("/recipes/{rid}", 1)
+                        .delete("/recipes/{rid}", 3)
                 )
                 .andExpect(status().isOk());
     }
 }
-
-
-
-

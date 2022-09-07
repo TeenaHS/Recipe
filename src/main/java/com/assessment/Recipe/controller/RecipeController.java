@@ -22,9 +22,9 @@ public class RecipeController {
     @Autowired
     RecipeService recipeservice;
 
-
     /**
      * @return Will return list of all Recipes in database
+     * @throws RecipeException
      */
     @Operation(summary ="Get Recipes",description ="Get a list of recipes", tags = "Get")
     @ApiResponses(value={@ApiResponse(responseCode = "200",description = "Recipe list" ),
@@ -40,7 +40,7 @@ public class RecipeController {
     /**
      * @param rid Recipes id which need to be found
      * @return one record matching the Recipes ID
-     * @throws RecipeException exception if id is not found
+     * @throws RecipeException
      */
     @Operation(summary ="Get Recipe",description ="Get a particular recipe by ID", tags = "Get")
     @ApiResponses(value={@ApiResponse(responseCode = "200",description = "Recipe" ),
@@ -54,8 +54,9 @@ public class RecipeController {
     }
 
     /**
-     * @param recipe information need to save in DB
+     * @param recipe information need to save in database
      * @return Saved object into database
+     * @throws RecipeException
      */
     @Operation(summary ="Add Recipe",description ="Add a recipe", tags = "Post")
     @ApiResponses(value={@ApiResponse(responseCode = "200",description = "Add a recipe" ),
@@ -71,8 +72,10 @@ public class RecipeController {
     }
 
     /**
-     * @param rid      Recipes id which need to be updated
-     * @param recipe EntityNotFoundException exception if id is not found
+     * @param rid Recipes id which need to be updated
+     * @param recipe Information need to be updated
+     * @return Saved object into database
+     * @throws RecipeException
      */
     @Operation(summary ="Update Recipe",description ="Update a particular recipe by ID", tags = "Update")
     @PutMapping(value= "/recipes/{rid}" )
@@ -85,8 +88,9 @@ public class RecipeController {
     }
 
     /**
-     * @param rid Recipes id which need to be deleted
-     * @throws RecipeException exception if id is not found
+     * @param rid Recipe id which need to be deleted
+     * @return Deletes the matched record
+     * @throws RecipeException
      */
     @Operation(summary ="Delete Recipe",description ="Delete a particular recipe by ID", tags = "Delete")
     @DeleteMapping(value= "/recipes/{rid}" )
@@ -100,12 +104,13 @@ public class RecipeController {
     }
 
     /**
-     * @param recipe information saved in db
-     * @return will return list of recipes contains information
+     * @param recipe information saved in database
+     * @return will return list of recipes that matches the criteria
+     * @throws RecipeException
      */
     @Operation(summary ="Filter Recipe",description ="Filter recipes ", tags = "Post")
     @PostMapping(value = "/recipes/filter")
-    public ResponseEntity<List<Recipes>> getSearch (@RequestBody UserDTO recipe) throws Exception {
+    public ResponseEntity<List<Recipes>> getSearch (@RequestBody UserDTO recipe) throws RecipeException {
         List<Recipes> searchRecipe =  recipeservice.getSearch(recipe);
         log.info("Filtering the recipe...");
         log.info("Recipe is filtered");

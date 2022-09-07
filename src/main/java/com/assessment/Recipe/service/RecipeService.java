@@ -5,7 +5,6 @@ import com.assessment.Recipe.dto.UserDTO;
 import com.assessment.Recipe.entity.Recipes;
 import com.assessment.Recipe.exception.RecipeException;
 import java.util.List;
-
 public interface RecipeService {
     public List<RecipeDTO> getAllRecipes() throws RecipeException;
     public RecipeDTO getRecipe(Integer RID) throws RecipeException;

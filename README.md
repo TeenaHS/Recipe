@@ -30,11 +30,12 @@ mvn clean install
 ```
 
 In case, If you want to run the application directly from IDE. Import the project to your favorite IDE as 'Existing maven project'. Select project from the IDE and run it as java application. Don't forget to update maven. I have configured the port to 8085 in properties. So the application can be accessed by `http://localhost:8085`
+
 Enter username and password in application.properties
 
 Application is then ready to run.
 
-TableScripts for the database can be found in resources folder with the name Recipedb.txt
+TableScripts for the database can be found in resources folder with the name Recipe_tablescript.txt
 
 Swagger is integrated for easy access of API. It can be accessed via : `http://localhost:8085/swagger-ui/index.html`
 The "Try it out" function on the swagger-ui page can be used to invoke the endpoints.
@@ -44,6 +45,25 @@ Url for open api doc: `http://localhost:8085/v3/api-docs`
 
 
 ## API Details
+
+- Get All Recipes
+
+Get all recipe service is used to get list of all the recipes.  Following is the api url. It is GET request.
+(http://localhost:8085/recipes)
+```
+GET  
+		'/recipes'
+```
+
+- Find Recipe by ID
+
+Find recipe by ID can be used to fetch particular Recipe.  Following is the api url. It is GET request which accept ID as path parameter.
+(http://localhost:8085/recipes/{rid})
+```
+GET 
+		'/recipes/{rid}' 
+```
+
 - Create Recipe
 
 Create recipe service is used to create new recipe. Following is the api url. It is POST request which accepts JSON body for recipe.
@@ -78,33 +98,12 @@ PUT
 		}'	 
 ```
 
-- Get All Recipes
-
-Get all recipe service is used to get list of all the recipes.  Following is the api url. It is GET request.
-(http://localhost:8085/recipes)
-```
-GET 
-		'Accept: application/json' 
-		'/recipes'
-```
-
-- Find Recipe by ID
-
-Find recipe by ID can be used to fetch particular Recipe.  Following is the api url. It is GET request which accept ID as path parameter.
-(http://localhost:8085/recipes/{rid})
-```
-GET 
-		'Accept: application/json' 
-		'/recipes/{rid}'
-```
-
 - Delete Recipe By ID
 
 Delete recipe by ID can be used to delete particular Recipe. Following is the api url. It is DELETE request which accept ID as path parameter.
 (http://localhost:8085/recipes/{rid})
 ```
 GET 
-		'Accept: application/json' 
 		'/recipes/{rid}'
 ```
 - Search Recipe 

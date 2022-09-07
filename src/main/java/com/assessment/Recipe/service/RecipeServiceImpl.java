@@ -8,7 +8,6 @@ import com.assessment.Recipe.repository.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -116,6 +115,7 @@ public class RecipeServiceImpl implements RecipeService {
             throw new RecipeException("Service.RECIPE_NOT_FOUND");
         return returnList;
     }
+
 
 }
 

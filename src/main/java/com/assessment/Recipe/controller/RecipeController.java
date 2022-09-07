@@ -27,8 +27,12 @@ public class RecipeController {
      * @throws RecipeException
      */
     @Operation(summary ="Get Recipes",description ="Get a list of recipes", tags = "Get")
-    @ApiResponses(value={@ApiResponse(responseCode = "200",description = "Recipe list" ),
-            @ApiResponse(responseCode = "404", description = "Recipe list not found")})
+    @ApiResponses(value={
+            @ApiResponse(responseCode = "200",description = "Recipe list" ),
+            @ApiResponse(responseCode = "404", description = "Recipe list not found"),
+            @ApiResponse(responseCode = "400",description = "Bad request" ),
+            @ApiResponse(responseCode = "500", description = "An internal error occurred")
+    })
     @GetMapping(value= "/recipes")
     public ResponseEntity<List<RecipeDTO>> getAllRecipes() throws RecipeException {
         List<RecipeDTO> recipeList = recipeservice.getAllRecipes();
@@ -43,8 +47,12 @@ public class RecipeController {
      * @throws RecipeException
      */
     @Operation(summary ="Get Recipe",description ="Get a particular recipe by ID", tags = "Get")
-    @ApiResponses(value={@ApiResponse(responseCode = "200",description = "Recipe" ),
-            @ApiResponse(responseCode = "404", description = "Recipe not found")})
+    @ApiResponses(value={
+            @ApiResponse(responseCode = "200",description = "Recipe" ),
+            @ApiResponse(responseCode = "404", description = "Recipe not found"),
+            @ApiResponse(responseCode = "400",description = "Bad request" ),
+            @ApiResponse(responseCode = "500", description = "An internal error occurred")
+    })
     @GetMapping(value= "/recipes/{rid}")
     public ResponseEntity<RecipeDTO>getRecipe(@PathVariable Integer rid) throws RecipeException {
         RecipeDTO recipe = recipeservice.getRecipe(rid);
@@ -59,8 +67,11 @@ public class RecipeController {
      * @throws RecipeException
      */
     @Operation(summary ="Add Recipe",description ="Add a recipe", tags = "Post")
-    @ApiResponses(value={@ApiResponse(responseCode = "200",description = "Add a recipe" ),
-            @ApiResponse(responseCode = "404", description = "Recipe added")})
+    @ApiResponses(value={
+            @ApiResponse(responseCode = "200",description = "Add a recipe" ),
+            @ApiResponse(responseCode = "400",description = "Bad request" ),
+            @ApiResponse(responseCode = "500", description = "An internal error occurred")
+    })
     @PostMapping(value= "/recipes")
     public ResponseEntity<String> addRecipe (@RequestBody RecipeDTO recipe) throws RecipeException {
         Recipes r = recipeservice.addRecipe(recipe);
@@ -78,6 +89,12 @@ public class RecipeController {
      * @throws RecipeException
      */
     @Operation(summary ="Update Recipe",description ="Update a particular recipe by ID", tags = "Update")
+    @ApiResponses(value={
+            @ApiResponse(responseCode = "200",description = "Recipe is updated" ),
+            @ApiResponse(responseCode = "404", description = "Recipe not found"),
+            @ApiResponse(responseCode = "400",description = "Bad request" ),
+            @ApiResponse(responseCode = "500", description = "An internal error occurred")
+    })
     @PutMapping(value= "/recipes/{rid}" )
     public ResponseEntity<Recipes> updateRecipe(@PathVariable Integer rid, @RequestBody RecipeDTO recipe) throws RecipeException {
         Recipes updateExistingRecipe = recipeservice.updateRecipe(rid,recipe.getNumberOfServings());
@@ -93,6 +110,12 @@ public class RecipeController {
      * @throws RecipeException
      */
     @Operation(summary ="Delete Recipe",description ="Delete a particular recipe by ID", tags = "Delete")
+    @ApiResponses(value={
+            @ApiResponse(responseCode = "200",description = "Recipe deleted" ),
+            @ApiResponse(responseCode = "404", description = "Recipe not found"),
+            @ApiResponse(responseCode = "400",description = "Bad request" ),
+            @ApiResponse(responseCode = "500", description = "An internal error occurred")
+    })
     @DeleteMapping(value= "/recipes/{rid}" )
     public ResponseEntity<String> deleteRecipe (@PathVariable Integer rid) throws RecipeException {
         recipeservice.deleteRecipe(rid);
@@ -109,6 +132,10 @@ public class RecipeController {
      * @throws RecipeException
      */
     @Operation(summary ="Filter Recipe",description ="Filter recipes ", tags = "Post")
+    @ApiResponses(value={
+            @ApiResponse(responseCode = "200",description = "List of filtered recipes" ),
+            @ApiResponse(responseCode = "403", description = "Access forbidden")
+    })
     @PostMapping(value = "/recipes/filter")
     public ResponseEntity<List<Recipes>> getSearch (@RequestBody UserDTO recipe) throws RecipeException {
         List<Recipes> searchRecipe =  recipeservice.getSearch(recipe);

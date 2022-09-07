@@ -40,7 +40,7 @@ TableScripts for the database can be found in resources folder with the name Rec
 Swagger is integrated for easy access of API. It can be accessed via : `http://localhost:8085/swagger-ui/index.html`
 The "Try it out" function on the swagger-ui page can be used to invoke the endpoints.
 
-Url for open api doc: `http://localhost:8085/v3/api-docs`
+Url for open api doc: `http://localhost:8085/v3/api-docs`. It is also present in the resource folder with the name OpenAPI.yaml 
 
 
 

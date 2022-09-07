@@ -134,7 +134,8 @@ public class RecipeController {
     @Operation(summary ="Filter Recipe",description ="Filter recipes ", tags = "Post")
     @ApiResponses(value={
             @ApiResponse(responseCode = "200",description = "List of filtered recipes" ),
-            @ApiResponse(responseCode = "403", description = "Access forbidden")
+            @ApiResponse(responseCode = "403", description = "Access forbidden"),
+            @ApiResponse(responseCode = "404", description = "Recipe not found")
     })
     @PostMapping(value = "/recipes/filter")
     public ResponseEntity<List<Recipes>> getSearch (@RequestBody UserDTO recipe) throws RecipeException {

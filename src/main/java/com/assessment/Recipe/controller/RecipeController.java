@@ -68,7 +68,7 @@ public class RecipeController {
      */
     @Operation(summary ="Add Recipe",description ="Add a recipe", tags = "Post")
     @ApiResponses(value={
-            @ApiResponse(responseCode = "200",description = "Add a recipe" ),
+            @ApiResponse(responseCode = "200",description = "Recipe added" ),
             @ApiResponse(responseCode = "400",description = "Bad request" ),
             @ApiResponse(responseCode = "500", description = "An internal error occurred")
     })
@@ -90,7 +90,7 @@ public class RecipeController {
      */
     @Operation(summary ="Update Recipe",description ="Update a particular recipe by ID", tags = "Update")
     @ApiResponses(value={
-            @ApiResponse(responseCode = "200",description = "Recipe is updated" ),
+            @ApiResponse(responseCode = "200",description = "Recipe updated" ),
             @ApiResponse(responseCode = "404", description = "Recipe not found"),
             @ApiResponse(responseCode = "400",description = "Bad request" ),
             @ApiResponse(responseCode = "500", description = "An internal error occurred")

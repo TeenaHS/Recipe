@@ -1,14 +1,14 @@
 package com.assessment.Recipe;
 
+import com.assessment.Recipe.dto.RecipeDTO;
 import com.assessment.Recipe.entity.Recipes;
 import com.assessment.Recipe.exception.RecipeException;
 import com.assessment.Recipe.repository.RecipeRepository;
 import com.assessment.Recipe.service.RecipeService;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
-@RunWith(SpringRunner.class)
+@SpringBootTest
 public class RecipeUnitTest extends RecipeApplicationTests{
     @MockBean
     private RecipeRepository reciperepository;
@@ -49,6 +49,18 @@ public class RecipeUnitTest extends RecipeApplicationTests{
     }
 
     /**
+     * Test case to Add a new recipe
+     * @throws RecipeException
+     */
+    @Test
+    public void addRecipeTest() throws RecipeException{
+        Recipes recipe=new Recipes(9, "Aloo Matar", "Veg", 3, "Potato,Onion,Matar", "Cook Aloo matar");
+        RecipeDTO recipedto=new RecipeDTO(9, "Aloo Matar", "Veg", 3, "Potato,Onion,Matar", "Cook Aloo matar");
+        when(reciperepository.save(any(Recipes.class))).thenReturn(recipe);
+        assertEquals(recipe,recipeservice.addRecipe(recipedto));
+    }
+
+    /**
      * Test case to Update a particular recipe
      * @throws RecipeException
      */
@@ -70,6 +82,7 @@ public class RecipeUnitTest extends RecipeApplicationTests{
         reciperepository.findById(anyInt());
         verify(reciperepository).findById(anyInt());
     }
+
     /************************************************************************/
 
     /**

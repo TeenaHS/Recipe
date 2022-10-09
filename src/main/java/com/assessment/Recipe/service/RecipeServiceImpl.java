@@ -1,7 +1,7 @@
 package com.assessment.Recipe.service;
 
 import com.assessment.Recipe.dto.RecipeDTO;
-import com.assessment.Recipe.dto.UserDTO;
+import com.assessment.Recipe.dto.SearchDTO;
 import com.assessment.Recipe.entity.Recipes;
 import com.assessment.Recipe.exception.RecipeException;
 import com.assessment.Recipe.repository.RecipeRepository;
@@ -93,7 +93,7 @@ public class RecipeServiceImpl implements RecipeService {
      * @return will return list of recipes that matches the criteria
      * @throws RecipeException
      */
-    public List<Recipes> getSearch(UserDTO recipe) throws RecipeException {
+    public List<Recipes> getSearch(SearchDTO recipe) throws RecipeException {
         List<Recipes> returnList = new ArrayList<>();
         List<Recipes> list = reciperepository.findAll();
         list.forEach(r -> {

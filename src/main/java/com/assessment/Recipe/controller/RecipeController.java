@@ -1,7 +1,7 @@
 package com.assessment.Recipe.controller;
 
 import com.assessment.Recipe.dto.RecipeDTO;
-import com.assessment.Recipe.dto.UserDTO;
+import com.assessment.Recipe.dto.SearchDTO;
 import com.assessment.Recipe.entity.Recipes;
 import com.assessment.Recipe.exception.RecipeException;
 import com.assessment.Recipe.service.RecipeService;
@@ -17,7 +17,6 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin
 public class RecipeController {
     @Autowired
     RecipeService recipeservice;
@@ -134,11 +133,10 @@ public class RecipeController {
     @Operation(summary ="Filter Recipe",description ="Filter recipes ", tags = "Post")
     @ApiResponses(value={
             @ApiResponse(responseCode = "200",description = "List of filtered recipes" ),
-            @ApiResponse(responseCode = "403", description = "Access forbidden"),
             @ApiResponse(responseCode = "404", description = "Recipe not found")
     })
     @PostMapping(value = "/recipes/filter")
-    public ResponseEntity<List<Recipes>> getSearch (@RequestBody UserDTO recipe) throws RecipeException {
+    public ResponseEntity<List<Recipes>> getSearch (@RequestBody SearchDTO recipe) throws RecipeException {
         List<Recipes> searchRecipe =  recipeservice.getSearch(recipe);
         log.info("Filtering the recipe...");
         log.info("Recipe is filtered");

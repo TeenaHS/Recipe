@@ -4,14 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 @Getter
 @Setter
-public class UserDTO {
-
+public class SearchDTO {
     private String foodType;
     private Integer numberOfServings;
     private String ingredients;
     private String instruction;
 
-    public UserDTO(String foodType, Integer numberOfServings, String ingredients,String instruction) {
+    public SearchDTO(String foodType, Integer numberOfServings, String ingredients, String instruction) {
         super();
         this.foodType = foodType;
         this.numberOfServings = numberOfServings;

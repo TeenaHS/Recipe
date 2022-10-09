@@ -1,4 +1,5 @@
 package com.assessment.Recipe;
+import com.assessment.Recipe.dto.SearchDTO;
 import com.assessment.Recipe.entity.Recipes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -10,11 +11,17 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import javax.transaction.Transactional;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+@Transactional
 public class RecipesIntegrationTest extends RecipeApplicationTests {
     @Autowired
     private WebApplicationContext webApplicationContext;
+
     private MockMvc mvc;
+
     @Before
     public void setup() {
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
@@ -76,6 +83,7 @@ public class RecipesIntegrationTest extends RecipeApplicationTests {
         }
     }
 
+
     /**
      * Test case to Update a particular recipe
      * @throws Exception
@@ -102,5 +110,25 @@ public class RecipesIntegrationTest extends RecipeApplicationTests {
                         .delete("/recipes/{rid}", 3)
                 )
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void searchRecipe() throws Exception{
+        mvc.perform(MockMvcRequestBuilders
+                        .post("/recipes/filter")
+                        .content(asJsonString(new SearchDTO("Non-Veg",4,"Chicken","bowl")))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    private String asJsonString(SearchDTO recipes) {
+        try {
+            return new ObjectMapper().writeValueAsString(recipes);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

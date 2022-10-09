@@ -12,9 +12,17 @@ public class RecipeDTO {
     private Integer numberOfServings;
     private String ingredients;
     private String instruction;
-
     public RecipeDTO() {
         super();
+    }
+
+    public RecipeDTO(Integer rid, String dish, String foodType, Integer numberOfServings, String ingredients, String instruction) {
+        this.rid = rid;
+        this.dish = dish;
+        this.foodType = foodType;
+        this.numberOfServings = numberOfServings;
+        this.ingredients = ingredients;
+        this.instruction = instruction;
     }
 
     public Recipes createEntity() {

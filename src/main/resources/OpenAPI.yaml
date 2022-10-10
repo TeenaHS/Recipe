@@ -122,8 +122,8 @@
               }
             }
           },
-          "200": {
-            "description": "Recipe is updated",
+          "404": {
+            "description": "Recipe not found",
             "content": {
               "*/*": {
                 "schema": {
@@ -132,8 +132,8 @@
               }
             }
           },
-          "404": {
-            "description": "Recipe not found",
+          "200": {
+            "description": "Recipe updated",
             "content": {
               "*/*": {
                 "schema": {
@@ -308,7 +308,7 @@
             }
           },
           "200": {
-            "description": "Add a recipe",
+            "description": "Recipe added",
             "content": {
               "*/*": {
                 "schema": {
@@ -332,7 +332,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserDTO"
+                "$ref": "#/components/schemas/SearchDTO"
               }
             }
           },
@@ -352,8 +352,8 @@
               }
             }
           },
-          "403": {
-            "description": "Access forbidden",
+          "404": {
+            "description": "Recipe not found",
             "content": {
               "*/*": {
                 "schema": {
@@ -421,7 +421,7 @@
           }
         }
       },
-      "UserDTO": {
+      "SearchDTO": {
         "type": "object",
         "properties": {
           "foodType": {

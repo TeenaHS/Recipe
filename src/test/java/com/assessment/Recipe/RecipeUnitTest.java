@@ -17,7 +17,6 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
-
 @SpringBootTest
 public class RecipeUnitTest extends RecipeApplicationTests{
     @MockBean
